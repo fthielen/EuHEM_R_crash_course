@@ -1,0 +1,510 @@
+---
+title: "Mastering the Basics"
+subtitle: "One-hour R crash course"
+author: "Frederick Thielen<br>Erasmus University Rotterdam<br>thielen@eshpm.eur.nl"
+date: "29 June 2023"
+output:
+  xaringan::moon_reader:
+    includes:
+      after_body: insert-logo.html
+    lib_dir: libs
+    css: ['xaringan-themer.css', 'default', 'hygge']
+    seal: false
+    nature:
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+      highlightLanguage: ["r", "css", "yaml"]
+      highlightLines: true
+      countIncrementalSlides: false
+  slidy_presentation: default
+  ioslides_presentation: default
+editor_options: 
+  chunk_output_type: console
+background-image: logo.png
+background-position: top right
+background-size: 110px 120px
+layout: true
+---
+
+```{r echo = FALSE}
+# library(xaringanthemer)
+# style_mono_accent(base_color = "#801A99",
+#                   header_font_google = google_font("Josefin Sans"),
+#   text_font_google   = google_font("Montserrat", "300", "300i"),
+#   code_font_google   = google_font("Fira Mono"))
+```
+
+
+## After this crashcourse you know
+
+- The difference between R and RStudio
+- How to "personalise" RStudio
+- Work with R Projects for reproducible research
+- Data types of R
+- Data structures of R
+- How to create objects
+- What packages are and how to use them
+- How to read an Excel file
+- The difference between Errors and Warnings
+- How to inspect data
+- How to manipulate data
+
+---
+
+
+## Introduction
+
+- R is a programming language and free software environment for statistical computing and graphics.
+- Importance of R in data science: data manipulation, data analysis, and data visualization.
+- R's strengths: data manipulation, statistical analysis, and creating plots.
+
+---
+
+## Getting Started
+
+- Installing R: https://www.r-project.org
+- Installing RStudio: https://posit.co/download/rstudio-desktop/
+- Tour of RStudio interface: Console, script editor, environment/history, and plots/help/packages.
+
+---
+
+## What is R?
+
+- R is a overgrown calculator. Try
+
+```{r}
+5 + 5 
+```
+
+---
+
+## Task: calculate with R
+
+Make the following assignments with R:
+
+- Sum of 1, 2, 3, 4, 5
+- 9 divided by 3
+- 4 to the power of 2
+- Mean of 1, 2, 3, 4, 5
+
+---
+
+## Task solution: calculate with R
+
+```{r}
+1 + 2 + 3 + 4 + 5
+9 / 3
+4^2
+(1 + 2 + 3 + 4 + 5) / 5
+```
+
+---
+
+## When you are more advanced or after understanding these slides
+
+```{r}
+sum(1:5)
+mean(1:5)
+```
+
+
+
+---
+
+## Why RStudio?
+
+- Integrated development environment (IDE) for R
+- Provides a user-friendly interface to R
+- Includes a console, syntax-highlighting editor supporting direct code execution, tools for plotting, history, debugging and workspace management
+
+---
+
+## Tweak your RStudio
+
+- Go to: Tools > Global Options
+
+### General
+- Disable "Restore .RData into workspace at startup"
+- Save workspace to .RData on exit "Never"
+
+### Code > Editing
+
+- Insert spaces for Tab; Tab width 8
+
+### Code > Display
+- Highlight selected line
+- Show maring; Margin column 80
+
+---
+
+## What data types can R handle?
+
+- numeric
+```{r}
+1:10
+```
+
+- character
+```{r}
+"foo"
+```
+
+- logical
+```{r}
+TRUE
+```
+
+---
+
+## Data Structures in R
+
+- Vectors: ordered collection of values. Use `c()` to create
+
+```{r}
+c(1, 5, 9, 3)
+
+c("foo", "bar")
+
+c(TRUE, FALSE, TRUE)
+```
+
+---
+
+## Data Structures in R
+
+- Matrices: two-dimensional vectors, created with `matrix()`
+
+```{r}
+matrix(data = c("foo", "bar", "hello", "world"),
+       nrow = 2,
+       ncol = 2)
+```
+
+---
+
+## Data Structures in R
+
+Dataframes: tables where each column is a vector of the same length, but different types allowed.
+
+```{r}
+data.frame(column_a = c("foo", "bar"),
+           column_b = c("hello", "world"))
+```
+
+---
+
+## Data Structures in R
+Lists: data structure that can contain elements of different data types like numbers, strings, vectors, and even other lists
+
+```{r}
+list(name = "John", age = 27, grades = c(80, 85, 90))
+```
+
+---
+
+## Task: create a vector
+
+Create a vector from:
+
+- Number 1, 2, 3, 4, 5
+- The words: "EuHEM", and "Summer", and "School"
+
+---
+
+## Task solution: create a vector
+
+Create a vector from
+
+```{r}
+c(1, 2, 3, 4, 5)
+
+c("EuHEM", "Summer", "School")
+```
+
+---
+
+## Objects in R
+
+- In R, almost everything is an object, including data items (numbers, characters), data structures (vectors, lists), and functions.
+
+```{r}
+# Creating an object
+my_object <- "Hello, R!"
+
+# Print the object
+my_object
+
+# Another object
+another_object <- c(1, 2, 3, 4, 5)
+
+another_object
+```
+---
+
+## Objects in R
+- Have unique names
+- Always start with a letter
+- May end with a number (discouraged)
+- Can be separated with "." or "_" (preferred) when needed
+
+```{r}
+my_object <- "Hello, R!"
+
+my_object
+
+my_object <- 5
+
+my_object
+```
+
+---
+
+## Task: create two objects
+
+- One with the numbers: 1, 2, 3
+- Another one with numbers: 5, 4
+
+---
+
+## Task solution: create two objects
+
+```{r}
+obj_one <- c(1, 2, 3)
+
+obj_two <- c(5, 4)
+```
+---
+
+## Using objects
+- Calculate with objects
+
+```{r}
+obj_one + 10
+
+obj_one + obj_two
+```
+
+---
+
+## Warnings vs Errors in R
+
+- Errors in R: An error indicates a serious issue with your code, and the execution will be stopped immediately when an error is encountered.
+
+```{r error=TRUE}
+# Example of an error
+x <- "a"
+x + 1  # This will cause an error because you can't add a string and a number
+```
+
+- Warnings in R: A warning does not stop the execution of the program but indicates a possible issue in your code or the result.
+
+```{r}
+# Example of a warning
+sqrt(-1)  # This will cause a warning because the square root of a negative number is not a real number in mathematics
+```
+
+---
+
+## Handling warnings and errors
+- Warnings and errors should never be ignored.
+- They provide valuable information about potential problems in your code. Debugging and resolving these issues is an essential part of the coding process.
+- Carefully read and understand the messages associated with warnings and errors. They often provide hints about what might be going wrong with your code.
+
+---
+
+## Where to find help?
+
+- stackoverflow.com
+- ChatGPT
+
+---
+
+## Basic Statistics in R
+- R knows many build-in functions
+
+```{r}
+# Mean
+mean(obj_one)
+
+# Median
+median(obj_one)
+```
+
+---
+
+## Packages in R
+
+- Packages in R: collection of R functions, data, and compiled code in a well-defined format. They extend the functionality of R by providing additional functions for statistical analysis, graphics, etc
+
+```{r}
+# Example of installing a package
+# install.packages("ggplot2")
+```
+
+---
+
+## Loading a package
+- Once a package is installed, it can be loaded into the current R session using the `library()` function.
+
+```{r}
+# Example of loading a package
+library(ggplot2)
+```
+
+---
+
+## Using a package
+- After loading a package, you can use the functions provided by the package.
+
+```{r}
+# Example of using a package function
+# data(mtcars)
+ggplot2::ggplot(mtcars, aes(x = mpg,
+                   y = hp)) +
+        geom_point()
+```
+
+---
+
+
+## Reading data from Excel with `opensxlsx`
+
+```{r}
+library("openxlsx")
+
+df <- openxlsx::read.xlsx(xlsxFile = here::here("data/starwars.xlsx"))
+```
+
+---
+
+## Inspecting data
+
+```{r}
+head(df)
+
+tail(df)
+
+summary(df)
+```
+
+---
+
+## Basic Data Manipulation with dplyr in R
+
+- dplyr is a powerful package in R for data manipulation. It provides a set of "verbs" (functions) that can be used to solve the most common data manipulation challenges.
+
+```{r}
+# Install and load dplyr if you haven't already
+# install.packages("dplyr")
+library(dplyr)
+
+```
+
+---
+
+## Filter
+- `filter()`: Used to extract subsets of rows from a data frame.
+
+```{r}
+# Example of using filter()
+dplyr::filter(.data = mtcars,
+              mpg > 20)
+```
+
+---
+
+## Select
+- `select()`: Used to select variables (columns) by their names.
+
+```{r}
+# Example of using select()
+dplyr::select(.data = mtcars,
+              mpg, cyl, hp)
+```
+
+---
+
+## Mutate
+- `mutate()`: Used to create new variables from existing ones.
+
+```{r}
+# Example of using mutate()
+dplyr::mutate(.data = mtcars,
+              l_per_100km = 235.21 / mpg)
+```
+
+---
+
+## Summarise
+- `summarise()`: Used to summarise multiple values into a single value.
+
+```{r}
+# Example of using summarise()
+dplyr::summarise(.data = mtcars,
+                 mean_mpg = mean(mpg))
+```
+
+---
+
+## Arrange
+- `arrange()`: Used to reorder rows of a data frame.
+
+```{r}
+# Example of using arrange()
+dplyr::arrange(.data = mtcars,
+               desc(mpg))
+```
+
+---
+
+## NA, NaN and other special values in R
+
+- NA in R: NA (Not Available) is a constant in R used to represent missing or undefined data.
+
+```{r}
+# Example of NA
+x <- c(1, 2, NA, 4, 5)
+x
+```
+
+- NaN in R: NaN (Not a Number) is a constant in R used to represent the result of an undefined mathematical operation.
+
+```{r}
+# Example of NaN
+0 / 0  # This will yield NaN
+```
+
+- Inf and -Inf in R: Inf and -Inf represent positive and negative infinity respectively.
+
+```{r}
+# Example of Inf and -Inf
+10 / 0   # This will yield Inf
+-10 / 0  # This will yield -Inf
+```
+
+- Checking for NA and NaN: `is.na()` and `is.nan()` functions can be used to check for NA and NaN values.
+
+```{r}
+# Check for NA and NaN
+is.na(x)
+is.nan(0 / 0)
+```
+
+- Dealing with NA and NaN: You can use `na.omit()`, `complete.cases()`, or other similar functions to deal with missing data in R.
+
+```{r}
+# Dealing with NA
+na.omit(x) 
+x[complete.cases(x)]
+```
+
+
+---
+
+## Further readings
+
+- https://r4ds.hadley.nz/intro.html

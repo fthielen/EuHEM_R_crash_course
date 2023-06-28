@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Mastering the Basics</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Frederick Thielen Erasmus University Rotterdam thielen@eshpm.eur.nl" />
+    <meta name="date" content="2023-06-29" />
+    <script src="libs/header-attrs-2.22/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+## After this crashcourse you know
+
+- The difference between R and RStudio
+- How to "personalise" RStudio
+- Work with R Projects for reproducible research
+- Data types of R
+- Data structures of R
+- How to create objects
+- What packages are and how to use them
+- How to read an Excel file
+- The difference between Errors and Warnings
+- How to inspect data
+- How to manipulate data
+
+---
+
+
+## Introduction
+
+- R is a programming language and free software environment for statistical computing and graphics.
+- Importance of R in data science: data manipulation, data analysis, and data visualization.
+- R's strengths: data manipulation, statistical analysis, and creating plots.
+
+---
+
+## Getting Started
+
+- Installing R: https://www.r-project.org
+- Installing RStudio: https://posit.co/download/rstudio-desktop/
+- Tour of RStudio interface: Console, script editor, environment/history, and plots/help/packages.
+
+---
+
+## What is R?
+
+- R is a overgrown calculator. Try
+
+
+```r
+5 + 5 
+```
+
+```
+## [1] 10
+```
+
+---
+
+## Task: calculate with R
+
+Make the following assignments with R:
+
+- Sum of 1, 2, 3, 4, 5
+- 9 divided by 3
+- 4 to the power of 2
+- Mean of 1, 2, 3, 4, 5
+
+---
+
+## Task solution: calculate with R
+
+
+```r
+1 + 2 + 3 + 4 + 5
+```
+
+```
+## [1] 15
+```
+
+```r
+9 / 3
+```
+
+```
+## [1] 3
+```
+
+```r
+4^2
+```
+
+```
+## [1] 16
+```
+
+```r
+(1 + 2 + 3 + 4 + 5) / 5
+```
+
+```
+## [1] 3
+```
+
+---
+
+## When you are more advanced or after understanding these slides
+
+
+```r
+sum(1:5)
+```
+
+```
+## [1] 15
+```
+
+```r
+mean(1:5)
+```
+
+```
+## [1] 3
+```
+
+
+
+---
+
+## Why RStudio?
+
+- Integrated development environment (IDE) for R
+- Provides a user-friendly interface to R
+- Includes a console, syntax-highlighting editor supporting direct code execution, tools for plotting, history, debugging and workspace management
+
+---
+
+## Tweak your RStudio
+
+- Go to: Tools &gt; Global Options
+
+### General
+- Disable "Restore .RData into workspace at startup"
+- Save workspace to .RData on exit "Never"
+
+### Code &gt; Editing
+
+- Insert spaces for Tab; Tab width 8
+
+### Code &gt; Display
+- Highlight selected line
+- Show maring; Margin column 80
+
+---
+
+## What data types can R handle?
+
+- numeric
+
+```r
+1:10
+```
+
+```
+##  [1]  1  2  3  4  5  6  7  8  9 10
+```
+
+- character
+
+```r
+"foo"
+```
+
+```
+## [1] "foo"
+```
+
+- logical
+
+```r
+TRUE
+```
+
+```
+## [1] TRUE
+```
+
+---
+
+## Data Structures in R
+
+- Vectors: ordered collection of values. Use `c()` to create
+
+
+```r
+c(1, 5, 9, 3)
+```
+
+```
+## [1] 1 5 9 3
+```
+
+```r
+c("foo", "bar")
+```
+
+```
+## [1] "foo" "bar"
+```
+
+```r
+c(TRUE, FALSE, TRUE)
+```
+
+```
+## [1]  TRUE FALSE  TRUE
+```
+
+---
+
+## Data Structures in R
+
+- Matrices: two-dimensional vectors, created with `matrix()`
+
+
+```r
+matrix(data = c("foo", "bar", "hello", "world"),
+       nrow = 2,
+       ncol = 2)
+```
+
+```
+##      [,1]  [,2]   
+## [1,] "foo" "hello"
+## [2,] "bar" "world"
+```
+
+---
+
+## Data Structures in R
+
+Dataframes: tables where each column is a vector of the same length, but different types allowed.
+
+
+```r
+data.frame(column_a = c("foo", "bar"),
+           column_b = c("hello", "world"))
+```
+
+```
+##   column_a column_b
+## 1      foo    hello
+## 2      bar    world
+```
+
+---
+
+## Data Structures in R
+Lists: data structure that can contain elements of different data types like numbers, strings, vectors, and even other lists
+
+
+```r
+list(name = "John", age = 27, grades = c(80, 85, 90))
+```
+
+```
+## $name
+## [1] "John"
+## 
+## $age
+## [1] 27
+## 
+## $grades
+## [1] 80 85 90
+```
+
+---
+
+## Task: create a vector
+
+Create a vector from:
+
+- Number 1, 2, 3, 4, 5
+- The words: "EuHEM", and "Summer", and "School"
+
+---
+
+## Task solution: create a vector
+
+Create a vector from
+
+
+```r
+c(1, 2, 3, 4, 5)
+```
+
+```
+## [1] 1 2 3 4 5
+```
+
+```r
+c("EuHEM", "Summer", "School")
+```
+
+```
+## [1] "EuHEM"  "Summer" "School"
+```
+
+---
+
+## Objects in R
+
+- In R, almost everything is an object, including data items (numbers, characters), data structures (vectors, lists), and functions.
+
+
+```r
+# Creating an object
+my_object &lt;- "Hello, R!"
+
+# Print the object
+my_object
+```
+
+```
+## [1] "Hello, R!"
+```
+
+```r
+# Another object
+another_object &lt;- c(1, 2, 3, 4, 5)
+
+another_object
+```
+
+```
+## [1] 1 2 3 4 5
+```
+---
+
+## Objects in R
+- Have unique names
+- Always start with a letter
+- May end with a number (discouraged)
+- Can be separated with "." or "_" (preferred) when needed
+
+
+```r
+my_object &lt;- "Hello, R!"
+
+my_object
+```
+
+```
+## [1] "Hello, R!"
+```
+
+```r
+my_object &lt;- 5
+
+my_object
+```
+
+```
+## [1] 5
+```
+
+---
+
+## Task: create two objects
+
+- One with the numbers: 1, 2, 3
+- Another one with numbers: 5, 4
+
+---
+
+## Task solution: create two objects
+
+
+```r
+obj_one &lt;- c(1, 2, 3)
+
+obj_two &lt;- c(5, 4)
+```
+---
+
+## Using objects
+- Calculate with objects
+
+
+```r
+obj_one + 10
+```
+
+```
+## [1] 11 12 13
+```
+
+```r
+obj_one + obj_two
+```
+
+```
+## Warning in obj_one + obj_two: longer object length is not a multiple of shorter
+## object length
+```
+
+```
+## [1] 6 6 8
+```
+
+---
+
+## Warnings vs Errors in R
+
+- Errors in R: An error indicates a serious issue with your code, and the execution will be stopped immediately when an error is encountered.
+
+
+```r
+# Example of an error
+x &lt;- "a"
+x + 1  # This will cause an error because you can't add a string and a number
+```
+
+```
+## Error in x + 1: non-numeric argument to binary operator
+```
+
+- Warnings in R: A warning does not stop the execution of the program but indicates a possible issue in your code or the result.
+
+
+```r
+# Example of a warning
+sqrt(-1)  # This will cause a warning because the square root of a negative number is not a real number in mathematics
+```
+
+```
+## Warning in sqrt(-1): NaNs produced
+```
+
+```
+## [1] NaN
+```
+
+---
+
+## Handling warnings and errors
+- Warnings and errors should never be ignored.
+- They provide valuable information about potential problems in your code. Debugging and resolving these issues is an essential part of the coding process.
+- Carefully read and understand the messages associated with warnings and errors. They often provide hints about what might be going wrong with your code.
+
+---
+
+## Where to find help?
+
+- stackoverflow.com
+- ChatGPT
+
+---
+
+## Basic Statistics in R
+- R knows many build-in functions
+
+
+```r
+# Mean
+mean(obj_one)
+```
+
+```
+## [1] 2
+```
+
+```r
+# Median
+median(obj_one)
+```
+
+```
+## [1] 2
+```
+
+---
+
+## Packages in R
+
+- Packages in R: collection of R functions, data, and compiled code in a well-defined format. They extend the functionality of R by providing additional functions for statistical analysis, graphics, etc
+
+
+```r
+# Example of installing a package
+# install.packages("ggplot2")
+```
+
+---
+
+## Loading a package
+- Once a package is installed, it can be loaded into the current R session using the `library()` function.
+
+
+```r
+# Example of loading a package
+library(ggplot2)
+```
+
+---
+
+## Using a package
+- After loading a package, you can use the functions provided by the package.
+
+
+```r
+# Example of using a package function
+# data(mtcars)
+ggplot2::ggplot(mtcars, aes(x = mpg,
+                   y = hp)) +
+        geom_point()
+```
+
+![](presentation_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
+
+---
+
+
+## Reading data from Excel with `opensxlsx`
+
+
+```r
+library("openxlsx")
+
+df &lt;- openxlsx::read.xlsx(xlsxFile = here::here("data/starwars.xlsx"))
+```
+
+---
+
+## Inspecting data
+
+
+```r
+head(df)
+```
+
+```
+##             name height mass  hair_color  skin_color eye_color birth_year
+## 1 Luke Skywalker    172   77       blond        fair      blue       19.0
+## 2          C-3PO    167   75        &lt;NA&gt;        gold    yellow      112.0
+## 3          R2-D2     96   32        &lt;NA&gt; white, blue       red       33.0
+## 4    Darth Vader    202  136        none       white    yellow       41.9
+## 5    Leia Organa    150   49       brown       light     brown       19.0
+## 6      Owen Lars    178  120 brown, grey       light      blue       52.0
+##      sex    gender homeworld species
+## 1   male masculine  Tatooine   Human
+## 2   none masculine  Tatooine   Droid
+## 3   none masculine     Naboo   Droid
+## 4   male masculine  Tatooine   Human
+## 5 female  feminine  Alderaan   Human
+## 6   male masculine  Tatooine   Human
+##                                                                                                                                       films
+## 1                                           The Empire Strikes Back, Revenge of the Sith, Return of the Jedi, A New Hope, The Force Awakens
+## 2                    The Empire Strikes Back, Attack of the Clones, The Phantom Menace, Revenge of the Sith, Return of the Jedi, A New Hope
+## 3 The Empire Strikes Back, Attack of the Clones, The Phantom Menace, Revenge of the Sith, Return of the Jedi, A New Hope, The Force Awakens
+## 4                                                              The Empire Strikes Back, Revenge of the Sith, Return of the Jedi, A New Hope
+## 5                                           The Empire Strikes Back, Revenge of the Sith, Return of the Jedi, A New Hope, The Force Awakens
+## 6                                                                                     Attack of the Clones, Revenge of the Sith, A New Hope
+##                             vehicles                starships
+## 1 Snowspeeder, Imperial Speeder Bike X-wing, Imperial shuttle
+## 2                                                            
+## 3                                                            
+## 4                                             TIE Advanced x1
+## 5              Imperial Speeder Bike                         
+## 6
+```
+
+```r
+tail(df)
+```
+
+```
+##              name height mass hair_color skin_color eye_color birth_year    sex
+## 82           Finn     NA   NA      black       dark      dark         NA   male
+## 83            Rey     NA   NA      brown      light     hazel         NA female
+## 84    Poe Dameron     NA   NA      brown      light     brown         NA   male
+## 85            BB8     NA   NA       none       none     black         NA   none
+## 86 Captain Phasma     NA   NA    unknown    unknown   unknown         NA   &lt;NA&gt;
+## 87  Padmé Amidala    165   45      brown      light     brown         46 female
+##       gender homeworld species
+## 82 masculine      &lt;NA&gt;   Human
+## 83  feminine      &lt;NA&gt;   Human
+## 84 masculine      &lt;NA&gt;   Human
+## 85 masculine      &lt;NA&gt;   Droid
+## 86      &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;
+## 87  feminine     Naboo   Human
+##                                                            films vehicles
+## 82                                             The Force Awakens         
+## 83                                             The Force Awakens         
+## 84                                             The Force Awakens         
+## 85                                             The Force Awakens         
+## 86                                             The Force Awakens         
+## 87 Attack of the Clones, The Phantom Menace, Revenge of the Sith         
+##                                               starships
+## 82                                                     
+## 83                                                     
+## 84                                  T-70 X-wing fighter
+## 85                                                     
+## 86                                                     
+## 87 H-type Nubian yacht, Naboo star skiff, Naboo fighter
+```
+
+```r
+summary(df)
+```
+
+```
+##      name               height           mass          hair_color       
+##  Length:87          Min.   : 66.0   Min.   :  15.00   Length:87         
+##  Class :character   1st Qu.:167.0   1st Qu.:  55.60   Class :character  
+##  Mode  :character   Median :180.0   Median :  79.00   Mode  :character  
+##                     Mean   :174.4   Mean   :  97.31                     
+##                     3rd Qu.:191.0   3rd Qu.:  84.50                     
+##                     Max.   :264.0   Max.   :1358.00                     
+##                     NA's   :6       NA's   :28                          
+##   skin_color         eye_color           birth_year         sex           
+##  Length:87          Length:87          Min.   :  8.00   Length:87         
+##  Class :character   Class :character   1st Qu.: 35.00   Class :character  
+##  Mode  :character   Mode  :character   Median : 52.00   Mode  :character  
+##                                        Mean   : 87.57                     
+##                                        3rd Qu.: 72.00                     
+##                                        Max.   :896.00                     
+##                                        NA's   :44                         
+##     gender           homeworld           species             films          
+##  Length:87          Length:87          Length:87          Length:87         
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##                                                                             
+##    vehicles          starships        
+##  Length:87          Length:87         
+##  Class :character   Class :character  
+##  Mode  :character   Mode  :character  
+##                                       
+##                                       
+##                                       
+## 
+```
+
+---
+
+## Basic Data Manipulation with dplyr in R
+
+- dplyr is a powerful package in R for data manipulation. It provides a set of "verbs" (functions) that can be used to solve the most common data manipulation challenges.
+
+
+```r
+# Install and load dplyr if you haven't already
+# install.packages("dplyr")
+library(dplyr)
+```
+
+```
+## 
+## Attaching package: 'dplyr'
+```
+
+```
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+```
+
+```
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+```
+
+---
+
+## Filter
+- `filter()`: Used to extract subsets of rows from a data frame.
+
+
+```r
+# Example of using filter()
+dplyr::filter(.data = mtcars,
+              mpg &gt; 20)
+```
+
+```
+##                 mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4      21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710     22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## Merc 240D      24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## Merc 230       22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## Fiat 128       32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## Honda Civic    30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## Toyota Corona  21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+## Fiat X1-9      27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## Porsche 914-2  26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## Lotus Europa   30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## Volvo 142E     21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+```
+
+---
+
+## Select
+- `select()`: Used to select variables (columns) by their names.
+
+
+```r
+# Example of using select()
+dplyr::select(.data = mtcars,
+              mpg, cyl, hp)
+```
+
+```
+##                      mpg cyl  hp
+## Mazda RX4           21.0   6 110
+## Mazda RX4 Wag       21.0   6 110
+## Datsun 710          22.8   4  93
+## Hornet 4 Drive      21.4   6 110
+## Hornet Sportabout   18.7   8 175
+## Valiant             18.1   6 105
+## Duster 360          14.3   8 245
+## Merc 240D           24.4   4  62
+## Merc 230            22.8   4  95
+## Merc 280            19.2   6 123
+## Merc 280C           17.8   6 123
+## Merc 450SE          16.4   8 180
+## Merc 450SL          17.3   8 180
+## Merc 450SLC         15.2   8 180
+## Cadillac Fleetwood  10.4   8 205
+## Lincoln Continental 10.4   8 215
+## Chrysler Imperial   14.7   8 230
+## Fiat 128            32.4   4  66
+## Honda Civic         30.4   4  52
+## Toyota Corolla      33.9   4  65
+## Toyota Corona       21.5   4  97
+## Dodge Challenger    15.5   8 150
+## AMC Javelin         15.2   8 150
+## Camaro Z28          13.3   8 245
+## Pontiac Firebird    19.2   8 175
+## Fiat X1-9           27.3   4  66
+## Porsche 914-2       26.0   4  91
+## Lotus Europa        30.4   4 113
+## Ford Pantera L      15.8   8 264
+## Ferrari Dino        19.7   6 175
+## Maserati Bora       15.0   8 335
+## Volvo 142E          21.4   4 109
+```
+
+---
+
+## Mutate
+- `mutate()`: Used to create new variables from existing ones.
+
+
+```r
+# Example of using mutate()
+dplyr::mutate(.data = mtcars,
+              l_per_100km = 235.21 / mpg)
+```
+
+```
+##                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+## Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+## Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+##                     l_per_100km
+## Mazda RX4             11.200476
+## Mazda RX4 Wag         11.200476
+## Datsun 710            10.316228
+## Hornet 4 Drive        10.991121
+## Hornet Sportabout     12.578075
+## Valiant               12.995028
+## Duster 360            16.448252
+## Merc 240D              9.639754
+## Merc 230              10.316228
+## Merc 280              12.250521
+## Merc 280C             13.214045
+## Merc 450SE            14.342073
+## Merc 450SL            13.595954
+## Merc 450SLC           15.474342
+## Cadillac Fleetwood    22.616346
+## Lincoln Continental   22.616346
+## Chrysler Imperial     16.000680
+## Fiat 128               7.259568
+## Honda Civic            7.737171
+## Toyota Corolla         6.938348
+## Toyota Corona         10.940000
+## Dodge Challenger      15.174839
+## AMC Javelin           15.474342
+## Camaro Z28            17.684962
+## Pontiac Firebird      12.250521
+## Fiat X1-9              8.615751
+## Porsche 914-2          9.046538
+## Lotus Europa           7.737171
+## Ford Pantera L        14.886709
+## Ferrari Dino          11.939594
+## Maserati Bora         15.680667
+## Volvo 142E            10.991121
+```
+
+---
+
+## Summarise
+- `summarise()`: Used to summarise multiple values into a single value.
+
+
+```r
+# Example of using summarise()
+dplyr::summarise(.data = mtcars,
+                 mean_mpg = mean(mpg))
+```
+
+```
+##   mean_mpg
+## 1 20.09062
+```
+
+---
+
+## Arrange
+- `arrange()`: Used to reorder rows of a data frame.
+
+
+```r
+# Example of using arrange()
+dplyr::arrange(.data = mtcars,
+               desc(mpg))
+```
+
+```
+##                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+## Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+## Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+## Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+```
+
+---
+
+## NA, NaN and other special values in R
+
+- NA in R: NA (Not Available) is a constant in R used to represent missing or undefined data.
+
+
+```r
+# Example of NA
+x &lt;- c(1, 2, NA, 4, 5)
+x
+```
+
+```
+## [1]  1  2 NA  4  5
+```
+
+- NaN in R: NaN (Not a Number) is a constant in R used to represent the result of an undefined mathematical operation.
+
+
+```r
+# Example of NaN
+0 / 0  # This will yield NaN
+```
+
+```
+## [1] NaN
+```
+
+- Inf and -Inf in R: Inf and -Inf represent positive and negative infinity respectively.
+
+
+```r
+# Example of Inf and -Inf
+10 / 0   # This will yield Inf
+```
+
+```
+## [1] Inf
+```
+
+```r
+-10 / 0  # This will yield -Inf
+```
+
+```
+## [1] -Inf
+```
+
+- Checking for NA and NaN: `is.na()` and `is.nan()` functions can be used to check for NA and NaN values.
+
+
+```r
+# Check for NA and NaN
+is.na(x)
+```
+
+```
+## [1] FALSE FALSE  TRUE FALSE FALSE
+```
+
+```r
+is.nan(0 / 0)
+```
+
+```
+## [1] TRUE
+```
+
+- Dealing with NA and NaN: You can use `na.omit()`, `complete.cases()`, or other similar functions to deal with missing data in R.
+
+
+```r
+# Dealing with NA
+na.omit(x) 
+```
+
+```
+## [1] 1 2 4 5
+## attr(,"na.action")
+## [1] 3
+## attr(,"class")
+## [1] "omit"
+```
+
+```r
+x[complete.cases(x)]
+```
+
+```
+## [1] 1 2 4 5
+```
+
+
+---
+
+## Further readings
+
+- https://r4ds.hadley.nz/intro.html
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>\n",
+"highlightLanguage": ["r", "css", "yaml"],
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(logo.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 28em;
+  right: 2em;
+  width: 100px;
+  height: 118px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
