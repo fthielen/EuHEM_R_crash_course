@@ -9,14 +9,9 @@ output:
       after_body: insert-logo.html
     lib_dir: libs
     css: ['xaringan-themer.css', 'default', 'hygge']
-    seal: false
+    seal: true
     nature:
       ratio: "16:9"
-      slideNumberFormat: |
-        <div class="progress-bar-container">
-          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
-          </div>
-        </div>
       highlightLanguage: ["r", "css", "yaml"]
       highlightLines: true
       countIncrementalSlides: false
@@ -31,11 +26,13 @@ layout: true
 ---
 
 ```{r echo = FALSE}
-# library(xaringanthemer)
-# style_mono_accent(base_color = "#801A99",
-#                   header_font_google = google_font("Josefin Sans"),
-#   text_font_google   = google_font("Montserrat", "300", "300i"),
-#   code_font_google   = google_font("Fira Mono"))
+library(xaringanthemer)
+style_mono_accent(base_color = "#801A99",
+                  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i"),
+  code_font_google   = google_font("Fira Mono"),
+  link_color = "#81a1c7",
+  base_font_size = "25px")
 ```
 
 
@@ -192,7 +189,7 @@ Dataframes: tables where each column is a vector of the same length, but differe
 
 ```{r}
 data.frame(column_a = c("foo", "bar"),
-           column_b = c("hello", "world"))
+           column_b = c(1, 5))
 ```
 
 ---

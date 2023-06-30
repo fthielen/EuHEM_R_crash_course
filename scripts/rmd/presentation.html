@@ -12,6 +12,22 @@
   </head>
   <body>
     <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Mastering the Basics
+]
+.subtitle[
+## One-hour R crash course
+]
+.author[
+### Frederick Thielen<br>Erasmus University Rotterdam<br><a href="mailto:thielen@eshpm.eur.nl" class="email">thielen@eshpm.eur.nl</a>
+]
+.date[
+### 29 June 2023
+]
+
+---
 
 
 
@@ -253,13 +269,13 @@ Dataframes: tables where each column is a vector of the same length, but differe
 
 ```r
 data.frame(column_a = c("foo", "bar"),
-           column_b = c("hello", "world"))
+           column_b = c(1, 5))
 ```
 
 ```
 ##   column_a column_b
-## 1      foo    hello
-## 2      bar    world
+## 1      foo        1
+## 2      bar        5
 ```
 
 ---
@@ -1011,7 +1027,6 @@ x[complete.cases(x)]
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "ratio": "16:9",
-"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>\n",
 "highlightLanguage": ["r", "css", "yaml"],
 "highlightLines": true,
 "countIncrementalSlides": false
